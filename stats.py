@@ -3,11 +3,14 @@ def get_book_text(file_path):
         file_contents = f.read()
         return file_contents
 
-def number_of_words(filepath):
-    result = get_book_text(filepath)
-    split_result = result.split()
-    number_of_words = 0
-    for words in split_result:
-        number_of_words += 1
-    message = f"{number_of_words} words found in the document"
-    return message
+def number_of_characters(filepath):
+    result = get_book_text(filepath).lower()
+    letter_dictionary = {}
+    for words in result:
+        if words.isalpha():
+            if words in letter_dictionary:
+                new_value = letter_dictionary[words] + 1
+                letter_dictionary[words] = new_value
+            else:
+                letter_dictionary[words] = 1
+    return letter_dictionary
